@@ -1,7 +1,7 @@
 # Solution
 1. Download the flag file. Assuming it's downloaded to `/home/user/Downloads/flag`.
 2. Change working directory to `/home/user/Downloads/` by running `cd ~/Downloads/`
-3. Run `cat flag`.
+3. Run `cat flag`
 
 To learn more about `cat`, run `cat --help`, or `man cat`.
 
