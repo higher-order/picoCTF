@@ -55,7 +55,7 @@ cd usr
 cd bin
 
 # So we see our executable is called steghide. Let's run it:
-stehide
+steghide
 
 # This gives us some help with how to use it
 
