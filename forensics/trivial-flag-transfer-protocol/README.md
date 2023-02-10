@@ -1,11 +1,16 @@
 # Trivial Flag Transfer Protocol
 
-## Common portion of path
-This is the part of the solution that is common to any OS.
+## Skills & Concepts Involved
+- Network packet monitoring
+- parsing packet captures using Wireshark (tshark is its command-line version)
+- steganography using steghide
 
-- Make sure you have Wireshark GUI.
-- Download tftp.pcapng
-- Open it with Wireshark.
+## Common portion of path
+This is the part of the solution that is common to any operating system.
+
+- Download the file. We see it's called `tftp.pcapng`
+- What is a .pcapng file? It's a packet capture (new generation) file format for network packets previously captured & saved in the file. Wireshark is the most commonly used free utility for reading it, so we'll use that.
+- Open it with Wireshark (GUI)
 - File > Export Objects > TFTP > Save All (In some folder you like)
 - Go to that folder
 - Observe the files:
@@ -19,22 +24,18 @@ picture2.bmp
 picture3.bmp
 ```
 
-- (If you look closely at the Wireshark information, you'll see that instructions.txt was sent from 10.10.10.11 to 10.10.10.12. We'll refer to them as 11 and 12 henceforth.)
-- So what does 11 say to 12? The string looks like this: 
-`GSGCQBRFAGRAPELCGBHEGENSSVPFBJRZHFGQVFTHVFRBHESYNTGENAFSRE.SVTHERBHGNJNLGBUVQRGURSYNTNAQVJVYYPURPXONPXSBEGURCYNA`
+- If you look closely at the Wireshark information, you'll see that instructions.txt was sent from 10.10.10.11 to 10.10.10.12. We'll refer to them as 11 and 12 henceforth.
+- So what does 11 say to 12? The string looks like this: `GSGCQBRFAGRAPELCGBHEGENSSVPFBJRZHFGQVFTHVFRBHESYNTGENAFSRE.SVTHERBHGNJNLGBUVQRGURSYNTNAQVJVYYPURPXONPXSBEGURCYNA`
 - This looks like a ciphered text. So we'll go to https://www.dcode.fr/shift-cipher to try to decipher it.
-- Paste the string into the website, then click "Decrypt." You'll find to the left that the top match is ROT13 (the standard cipher). It says:
-`TFTPDOESNTENCRYPTOURTRAFFICSOWEMUSTDISGUISEOURFLAGTRANSFER.FIGUREOUTAWAYTOHIDETHEFLAGANDIWILLCHECKBACKFORTHEPLAN`
+- Paste the string into the website, then click "Decrypt." You'll find to the left that the top match is ROT13 (the simplest Caesar cipher due to its ability to reverse itself, since 13 + 13 = 26.). It says: `TFTPDOESNTENCRYPTOURTRAFFICSOWEMUSTDISGUISEOURFLAGTRANSFER.FIGUREOUTAWAYTOHIDETHEFLAGANDIWILLCHECKBACKFORTHEPLAN`
 
 - Okay, 11 is telling 12 to figure out a way to hide the flag and send back a plan for doing so.
 
 - Next, we see in Wireshark that 12 sends the file 'plan' to 11.
 
-- Let's see what it says:
-`VHFRQGURCEBTENZNAQUVQVGJVGU-QHRQVYVTRAPR.PURPXBHGGURCUBGBF`
+- Let's see what it says: `VHFRQGURCEBTENZNAQUVQVGJVGU-QHRQVYVTRAPR.PURPXBHGGURCUBGBF`
 
-- Back in the cipher. We get:
-`IUSEDTHEPROGRAMANDHIDITWITH-DUEDILIGENCE.CHECKOUTTHEPHOTOS`
+- Back in the cipher. We get: `IUSEDTHEPROGRAMANDHIDITWITH-DUEDILIGENCE.CHECKOUTTHEPHOTOS`
 
 - Okay. It says that 12 used the program (probably program.deb) to hide the flag in the pictures.
 
