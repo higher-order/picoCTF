@@ -78,6 +78,7 @@ After you have installed steghide, simply running it gives us some help with how
 ```bash
 steghide
 ```
+(If you are in Webshell, you have to be in the same directory of `steghide`. In our case it's `program/usr/bin/`)
 
 Learn about the `-sf` flag and the `-p` flag, since we will use them.
 
