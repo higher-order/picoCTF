@@ -5,12 +5,12 @@
 - parsing packet captures using Wireshark (tshark is its command-line version)
 - steganography using steghide
 
-## Common portion of path
+## Common part of the solution
 This is the part of the solution that is common to any operating system.
 
 - Download the file. We see it's called `tftp.pcapng`
-- What is a .pcapng file? It's a packet capture (new generation) file format for network packets previously captured & saved in the file. Wireshark is the most commonly used free utility for reading it, so we'll use that.
-- Open it with Wireshark (GUI)
+- What is a .pcapng file? It's a packet capture (new generation) file format for network packets previously captured & saved in the file. Wireshark is the most commonly used free and open-source utility for reading it, so we'll use that.
+- Open `tftp.pcapng` with Wireshark (GUI)
 - File > Export Objects > TFTP > Save All (In some folder you like)
 - Go to that folder
 - Observe the files:
@@ -41,11 +41,22 @@ picture3.bmp
 
 - Let's run the program on the pictures.
 
-## Webshell branch
+## If you are on Debian-based Linux
+Let's install `program.deb`:
+```
+sudo apt install -y program.deb
+```
+If you don't fully trust the `.deb` file downloaded from picoCTF, `program.deb` is essentially a package called steghide.
+So alternatively, you can just install steghide from `apt`:
+```
+sudo apt install steghide
+```
+
+## If you are using Webshell
 
 ```bash
-# Make sure you have dpkg on your Linux install
-# Let's run the program hidden in program.deb
+# Make sure you have dpkg on the Webshell instance
+# Let's install program.deb
 # We don't have root access, so we'll need to run a trick using dpkg (credit to Freeman)
 dpkg -x program.deb program
 
@@ -54,18 +65,32 @@ cd program
 cd usr
 cd bin
 
-# So we see our executable is called steghide. Let's run it:
+# So we see our executable is called steghide. Let's see if we can run it:
 steghide
-
-# This gives us some help with how to use it
-
-# After fiddling around, we realize we need to use a password for the extraction of some hidden phrase from a picture. We try a bunch of pictures, using the password hint in the plan called 'DUEDILIGENCE' 
-steghide extract -sf ../../../picture3.bmp -p DUEDILIGENCE
-
-# This generates the output file flag.txt
-
-# Open up the flag.txt
-cat ../../../flag.txt
-
-# This gives us our picoCTF flag!
 ```
+
+## If you are on other OS
+TODO: Fill in instructions for players on Windows, Mac, or Arch Linux, etc. It may be harder on these OS.
+
+
+## Common part of the solution again
+After you have installed steghide, simply running it gives us some help with how to use it
+```bash
+steghide
+```
+
+Learn about the `-sf` flag and the `-p` flag, since we will use them.
+
+We need to use a password for the extraction of some hidden phrase from a picture. We try all three pictures, using the password hint in the plan called 'DUEDILIGENCE' 
+```bash
+steghide extract -sf ../../../picture3.bmp -p DUEDILIGENCE
+```
+
+This generates the output file flag.txt
+
+Open up the flag.txt
+```bash
+cat ../../../flag.txt
+```
+
+This gives us our picoCTF flag!
