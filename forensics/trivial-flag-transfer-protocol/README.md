@@ -44,7 +44,7 @@ picture3.bmp
 ## If you are on Debian-based Linux
 Let's install `program.deb`:
 ```
-sudo apt install -y program.deb
+sudo apt install -y ./program.deb
 ```
 If you don't fully trust the `.deb` file downloaded from picoCTF, `program.deb` is essentially a package called steghide.
 So alternatively, you can just install steghide from `apt`:
